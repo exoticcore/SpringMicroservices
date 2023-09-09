@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import net.kreckkead.employeeservice.dto.APIResponseDto;
 import net.kreckkead.employeeservice.dto.DepartmantDto;
 import net.kreckkead.employeeservice.dto.EmployeeDto;
+import net.kreckkead.employeeservice.dto.OrganizationDto;
 import net.kreckkead.employeeservice.entity.Employee;
 import net.kreckkead.employeeservice.mapper.EmployeeMapper;
 import net.kreckkead.employeeservice.repository.EmployeeRepository;
@@ -60,9 +61,15 @@ public class EmployeeServiceImp implements EmployeeService {
         // DepartmantDto departmantDto = responseEntity.getBody();
 
         DepartmantDto departmantDto = webClient.get()
-                .uri("http://localhost:8080/api/departments/" + employee.getDepartmentCode())
+                .uri("http://localhost:9191/api/departments/" + employee.getDepartmentCode())
                 .retrieve()
                 .bodyToMono(DepartmantDto.class)
+                .block();
+
+        OrganizationDto organizationDto = webClient.get()
+                .uri("http://localhost:9191/api/organizations/" + employee.getOrganizationCode())
+                .retrieve()
+                .bodyToMono(OrganizationDto.class)
                 .block();
 
         // DepartmantDto departmantDto =
@@ -73,6 +80,7 @@ public class EmployeeServiceImp implements EmployeeService {
         APIResponseDto apiResponseDto = new APIResponseDto();
         apiResponseDto.setEmployee(employeeDto);
         apiResponseDto.setDepartmant(departmantDto);
+        apiResponseDto.setOrganization(organizationDto);
 
         return apiResponseDto;
     }
