@@ -18,7 +18,7 @@ import net.kreckkead.employeeservice.service.EmployeeService;
 @RequestMapping("/api/employees")
 @AllArgsConstructor
 public class EmployeeController {
-    
+
     private EmployeeService employeeService;
 
     // Build Save Employee REST API
