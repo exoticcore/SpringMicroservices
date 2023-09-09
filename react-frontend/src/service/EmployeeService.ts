@@ -6,7 +6,7 @@ const EMPLOYEE_ID = 2;
 
 class EmployeeService {
   getEmployee() {
-    return axios.get('http://localhost:9191/api/employees/2');
+    return axios.get(`${EMPLOYEE_SERVICE_BASE_URL}/${EMPLOYEE_ID}`);
   }
 }
 
